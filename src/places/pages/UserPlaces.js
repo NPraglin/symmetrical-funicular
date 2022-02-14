@@ -11,7 +11,7 @@ const DUMMY_PLACES =[
     address: '201 E Randolph St, Chicago, IL 60602',
     location: {
       lat: 41.882702,
-      long: -87.619392
+      lng: -87.619392
     },
     creator: 'u1'
   },
@@ -23,13 +23,13 @@ const DUMMY_PLACES =[
     address: '201 E Randolph St, Chicago, IL 60602',
     location: {
       lat: 41.882702,
-      long: -87.619392
+      lng: -87.619392
     },
     creator: 'u2'
   }
 ]
 
-const UserPlaces = props => {
+const UserPlaces = () => {
 
   const userId = useParams().userId;
   const loadedPlaces = DUMMY_PLACES.filter(place => place.creator === userId);
