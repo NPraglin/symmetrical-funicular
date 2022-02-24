@@ -1,0 +1,72 @@
+import React from "react";
+import { useParams } from 'react-router-dom';
+import Input from "../../shared/components/FormElements/Input";
+import Button from "../../shared/components/FormElements/Button";
+import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH} from '../../shared/util/validators';
+
+const DUMMY_PLACES =[
+  {
+    id: 'p1',
+    title: 'The Bean',
+    description: 'Tourist attraction in Chicago by User 1',
+    imageUrl: 'https://cdn.choosechicago.com/uploads/2019/07/first-time-bean-1.jpg',
+    address: '201 E Randolph St, Chicago, IL 60602',
+    location: {
+      lat: 41.882702,
+      lng: -87.619392
+    },
+    creator: 'u1'
+  },
+  {
+    id: 'p2',
+    title: 'The Bean',
+    description: 'User 2 visited the Bean',
+    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/Cloud_Gate_%28The_Bean%29_from_east%27.jpg/340px-Cloud_Gate_%28The_Bean%29_from_east%27.jpg',
+    address: '201 E Randolph St, Chicago, IL 60602',
+    location: {
+      lat: 41.882702,
+      lng: -87.619392
+    },
+    creator: 'u2'
+  }
+]
+
+const UpdatePlace = () => {
+  const placeId = useParams().placeId;
+
+  const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId)
+
+  if (!identifiedPlace) {
+    return (
+      <div classname="center">
+        <h2>Could not find place</h2>
+      </div>
+    );
+  }
+  return (
+    <form>
+      <Input 
+        id='title' 
+        element='input' 
+        type='text' 
+        label='Title' 
+        validators={[VALIDATOR_REQUIRE()]} errorText='Please enter a valid title' 
+        onInput={() => {}}
+        value={identifiedPlace.title}
+        valid={true}
+      />
+      <Input 
+        id='description'
+        element='textarea'  
+        label='Description' 
+        validators={[VALIDATOR_MINLENGTH(5)]} errorText='Please enter a valid description, at least 5 characters.' 
+        onInput={() => {}}
+        value={identifiedPlace.description}
+        valid={true}
+      />
+      <Button type='submit' disabled={true}>UPDATE PLACE</Button>
+    </form>
+  );
+};
+
+export default UpdatePlace;
