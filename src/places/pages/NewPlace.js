@@ -10,18 +10,18 @@ const formReducer = (state, action) => {
       let formIsValid = true;
       for (const inputId in state.inputs) {
         if (inputId === action.inputId) {
-          formIsValid = formIsValid && action.IsValid;
+          formIsValid = formIsValid && action.isValid;
         } else {
           formIsValid = formIsValid && state.inputs[inputId].isValid;
         }
       }
       return {
         ...state,
-        input: {
+        inputs: {
           ...state.inputs,
           [action.inputId]: { value: action.value, isValid: action.isValid },
-          isValid: formIsValid
-        }
+        },
+        isValid: formIsValid
       };
     default:
       return state;
@@ -60,7 +60,6 @@ const NewPlace = () => {
     <Input 
       id='description'
       element='textarea' 
-      type='text' 
       label='Description' 
       validators={[VALIDATOR_MINLENGTH(5)]} 
       errorText='Please enter a valid description, a least 5 characters.' 
