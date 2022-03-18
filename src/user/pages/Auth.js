@@ -59,7 +59,7 @@ const Auth = () => {
         // Loading state true so we can render some loading status for users on the front end
         // Point to backend signup sending POST req and body
         try {
-          await sendRequest(
+          const responseData = await sendRequest(
             'http://localhost:5000/api/users/login', 
             'POST', 
             JSON.stringify({
@@ -68,7 +68,7 @@ const Auth = () => {
             }), 
             {'Content-Type': 'application/json'}
           );
-        auth.login();
+        auth.login(responseData.user.id);
         } catch (err) {
           // No need to handle error becuase custom hook handles that for us, this can be empty or just console.log
           console.log(err)
@@ -79,7 +79,7 @@ const Auth = () => {
     try {
       // Loading state true so we can render some loading status for users on the front end
       // Point to backend signup sending POST req and body
-      await sendRequest(
+      const responseData = await sendRequest(
         'http://localhost:5000/api/users/signup', 
         'POST', 
         JSON.stringify({
@@ -89,7 +89,7 @@ const Auth = () => {
         }), 
         {'Content-Type': 'application/json'});
     
-      auth.login();
+      auth.login(responseData.user.id);
     } catch (err) {
       console.log(err);
       }

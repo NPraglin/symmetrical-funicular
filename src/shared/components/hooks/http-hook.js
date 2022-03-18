@@ -18,9 +18,9 @@ export const useHttpClient = () => {
 
     try {
       const response = await fetch(url, {
-        method: method,
-        body: body,
-        headers: headers,
+        method,
+        body,
+        headers,
         signal: httpAbortCtrl.signal // Links abort controller to request.. cancel connection reqs
       });
       // Await response from backend which should be created user DATA
@@ -41,7 +41,6 @@ export const useHttpClient = () => {
       throw err;
     }
 
-  
   }, []);
 
   const clearError = () => {
@@ -52,9 +51,9 @@ export const useHttpClient = () => {
   // just makes sure we never continue with requests that are making its way out
   useEffect(() => {
     return () => {
-      activeHttpRequests.current.forEach(abortCtrl => abortCtrl.abort()) // aborts each request upon endind the function
+      activeHttpRequests.current.forEach(abortCtrl => abortCtrl.abort());
     };
-  }, [])
+  }, []);
   // return all three shorthand syntax
   return { isLoading, error, sendRequest, clearError }
 };
