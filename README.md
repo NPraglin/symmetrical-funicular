@@ -1,2 +1,10 @@
 # symmetrical-funicular
-React Social Media Location Sharing App
+WorkByte: A web app for rating, reviewing, and sharing rentable work space. This project is a hobby to keep my full stack development skills sharp.
+
+## Technologies Used
+- MERN Stack
+
+## Road Map
+- Search by zip code, city, and state implemented
+- API connection to view available space in area
+- Full migration to AWS hosting
