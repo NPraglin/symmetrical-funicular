@@ -1,41 +1,28 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, useHistory } from 'react-router-dom';
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
 import { VALIDATOR_REQUIRE, VALIDATOR_MINLENGTH} from '../../shared/util/validators';
 import './PlaceForm.css';
 import { useForm } from "../../shared/components/hooks/form-hook";
+import { useHttpClient } from "../../shared/components/hooks/http-hook";
+import AuthContext from "../../shared/context/auth-context";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 
-const DUMMY_PLACES =[
-  {
-    id: 'p1',
-    title: 'The Bean',
-    description: 'Tourist attraction in Chicago by User 1',
-    imageUrl: 'https://cdn.choosechicago.com/uploads/2019/07/first-time-bean-1.jpg',
-    address: '201 E Randolph St, Chicago, IL 60602',
-    location: {
-      lat: 41.882702,
-      lng: -87.619392
-    },
-    creator: 'u1'
-  },
-  {
-    id: 'p2',
-    title: 'The Bean',
-    description: 'User 2 visited the Bean',
-    imageUrl: 'https://upload.wikimedia.org/wikipedia/en/thumb/c/c1/Cloud_Gate_%28The_Bean%29_from_east%27.jpg/340px-Cloud_Gate_%28The_Bean%29_from_east%27.jpg',
-    address: '201 E Randolph St, Chicago, IL 60602',
-    location: {
-      lat: 41.882702,
-      lng: -87.619392
-    },
-    creator: 'u2'
-  }
-]
+
 
 const UpdatePlace = () => {
-  const [isLoading, setIsLoading] = useState(true);
+  // Auth context to get login info
+  const auth = useContext(AuthContext)
+  // Http Requests loaded in
+  const {isLoading, error, sendRequest, clearError} = useHttpClient();  
+  // States for when the place is loaded
+  const [loadedPlace, setloadedPlace] = useState();
+  // Place ID
   const placeId = useParams().placeId;
+  // Initializing history hook
+  const history = useHistory();
 
   const [formState, inputHandler, setFormData] = useForm({
     title: {
@@ -48,32 +35,56 @@ const UpdatePlace = () => {
     }
   }, false);
 
-  const identifiedPlace = DUMMY_PLACES.find(p => p.id === placeId);
-
+  // hook to get the place per ID
   useEffect(() => {
+    const fetchPlace = async () => {
+      try { // Don't need error handling, our custom hook's function (sendRequest) handles that
+        const responseData = await sendRequest(`http://localhost:5000/api/places/${placeId}`);
+        setloadedPlace(responseData.place);
+        setFormData({
+          title: {
+            value: responseData.place.title,
+            isValid: true
+          },
+          description: {
+            value: responseData.place.description,
+            isValid: true
+          }
+        }, true);
+      } catch (err) {
+        console.log(err)
+      }
+    };
+    fetchPlace()
+  },[sendRequest, placeId, setFormData]);
 
-    if (identifiedPlace) {
-      setFormData({
-        title: {
-          value: identifiedPlace.title,
-          isValid: true
-        },
-        description: {
-          value: identifiedPlace.description,
-          isValid: true
-        }
-      }, true);
-      setIsLoading(false);
-    }
-
-  }, [setFormData, identifiedPlace]);
-
-  const placeUpdateSubmitHandler = event => {
+  // Front end function updating place
+  const placeUpdateSubmitHandler = async event => {
     event.preventDefault();
-    console.log(formState.inputs);
+    try {
+    await sendRequest(`http://localhost:5000/api/places/${placeId}`, 'PATCH', JSON.stringify({
+      title: formState.inputs.title.value,
+      description: formState.inputs.description.value
+    }), {
+      'Content-Type': 'application/json'
+    }
+    );
+    // Save that redirect
+    history.push('/' + auth.userId + '/places');
+  } catch (err) {
+    console.log(err)
+  }
+  };
+
+  if (isLoading) {
+    return (
+    <div className="center">
+        <LoadingSpinner />
+      </div>
+    )
   }
 
-  if (!identifiedPlace) {
+  if (!loadedPlace && !error) {
     return (
       <div className="center">
         <h2>Could not find place</h2>
@@ -81,16 +92,10 @@ const UpdatePlace = () => {
     );
   }
 
-  if (isLoading) {
-    return (
-    <div className="center">
-        <h2>Loading...</h2>
-      </div>
-    )
-  }
-
   return (
-    <form className="place-form" onSubmit={placeUpdateSubmitHandler}>
+    <React.Fragment>
+      <ErrorModal error={error} onClear={clearError}/>
+    {!isLoading && loadedPlace && (<form className="place-form" onSubmit={placeUpdateSubmitHandler}>
       <Input 
         id='title' 
         element='input' 
@@ -98,8 +103,8 @@ const UpdatePlace = () => {
         label='Title' 
         validators={[VALIDATOR_REQUIRE()]} errorText='Please enter a valid title' 
         onInput={inputHandler}
-        value={formState.inputs.title.value}
-        valid={formState.inputs.title.isValid}
+        value={loadedPlace.title}
+        valid={true}
       />
       <Input 
         id='description'
@@ -107,11 +112,12 @@ const UpdatePlace = () => {
         label='Description' 
         validators={[VALIDATOR_MINLENGTH(5)]} errorText='Please enter a valid description, at least 5 characters.' 
         onInput={inputHandler}
-        value={formState.inputs.description.value}
-        valid={formState.inputs.title.isValid}
+        value={loadedPlace.description}
+        valid={true}
       />
       <Button type='submit' disabled={!formState.isValid}>UPDATE PLACE</Button>
-    </form>
+    </form>)}
+    </React.Fragment>
   );
 };
 

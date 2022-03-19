@@ -8,6 +8,7 @@ import { VALIDATOR_MINLENGTH, VALIDATOR_REQUIRE } from '../../shared/util/valida
 import { useForm } from '../../shared/components/hooks/form-hook';
 import { useHttpClient } from '../../shared/components/hooks/http-hook';
 import AuthContext from '../../shared/context/auth-context';
+import { useHistory } from 'react-router-dom';
 
 const NewPlace = () => {
   const auth = useContext(AuthContext);
@@ -28,6 +29,8 @@ const NewPlace = () => {
     }
   }, false);
 
+  const history = useHistory();
+
   // Submit our new place!
   const placeSubmitHandler = async event => {
     event.preventDefault();
@@ -43,6 +46,7 @@ const NewPlace = () => {
         }), 
         {'Content-Type': 'application/json'}
       );
+      history.push('/');
     } catch (err) {
       // Redirect user to diff page
       console.log(err)
