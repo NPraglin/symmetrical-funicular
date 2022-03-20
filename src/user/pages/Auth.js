@@ -9,6 +9,7 @@ import AuthContext from "../../shared/context/auth-context";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useHttpClient } from "../../shared/components/hooks/http-hook";
+import ImageUpload from "../../shared/components/FormElements/imageUpload";
 
 
 const Auth = () => {
@@ -36,7 +37,8 @@ const Auth = () => {
       setFormData(
       {
         ...formState.inputs,
-        name: undefined
+        name: undefined,
+        image: undefined
       }, 
       formState.inputs.email.isValid && formState.inputs.password.isValid);
     } else {
@@ -44,6 +46,10 @@ const Auth = () => {
         ...formState.inputs,
         name: {
           value: '',
+          isValid: false
+        },
+        image: {
+          value: null,
           isValid: false
         }
       }, false);
@@ -54,6 +60,8 @@ const Auth = () => {
   // Handles our signing up and logging in
   const authSubmitHandler = async event => {
     event.preventDefault();
+    // debug log to see if picked file is part of inputs
+    console.log(formState.inputs)
     // Logging in?
     if (isLoginMode) {
         // Loading state true so we can render some loading status for users on the front end
@@ -113,6 +121,7 @@ const Auth = () => {
               errorText="Please enter a name" 
               onInput={inputHandler}
             />)}
+            {!isLoginMode && <ImageUpload center id="image" onInput={inputHandler} />}
           <Input 
             element='input' 
             id='email' 
@@ -127,7 +136,7 @@ const Auth = () => {
             id='password' 
             type='password' 
             label='Password' 
-            validators={[VALIDATOR_MINLENGTH(5)]}
+            validators={[VALIDATOR_MINLENGTH(6)]}
             errorText='Please enter a valid password of at least 5 characters'
             onInput={inputHandler}  
           />

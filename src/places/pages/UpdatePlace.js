@@ -14,7 +14,7 @@ import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 
 const UpdatePlace = () => {
   // Auth context to get login info
-  const auth = useContext(AuthContext)
+  const auth = useContext(AuthContext);
   // Http Requests loaded in
   const {isLoading, error, sendRequest, clearError} = useHttpClient();  
   // States for when the place is loaded
