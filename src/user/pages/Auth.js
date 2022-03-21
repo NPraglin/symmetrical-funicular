@@ -85,17 +85,16 @@ const Auth = () => {
     // Signing up?
     } else {
     try {
-      // Loading state true so we can render some loading status for users on the front end
-      // Point to backend signup sending POST req and body
+      // using formData we can refractor the auth rather than manually sending a POST body
+      const formData = new FormData();
+      formData.append('email', formState.inputs.email.value);
+      formData.append('name', formState.inputs.name.value);
+      formData.append('password', formState.inputs.password.value);
+      formData.append('image', formState.inputs.image.value);
       const responseData = await sendRequest(
         'http://localhost:5000/api/users/signup', 
         'POST', 
-        JSON.stringify({
-          name: formState.inputs.name.value,
-          email: formState.inputs.email.value,
-          password: formState.inputs.password.value
-        }), 
-        {'Content-Type': 'application/json'});
+        formData);
     
       auth.login(responseData.user.id);
     } catch (err) {
