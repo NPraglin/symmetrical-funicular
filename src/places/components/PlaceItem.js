@@ -34,7 +34,7 @@ const PlaceItem = props => {
     setShowConfirmModal(false);
     try {
     // Use sendRequest to send delete req
-    await sendRequest(`http://localhost:5000/api/places/${props.id}`, 'DELETE');
+    await sendRequest(`http://localhost:5000/api/places/${props.id}`, 'DELETE', null, {Authorization: 'Bearer ' + auth.token});
     // Calls onDelete property from the props forwarded from PlaceList
     props.onDelete(props.id);
     } catch (err) {

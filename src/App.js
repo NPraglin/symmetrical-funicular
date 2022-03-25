@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -13,22 +13,12 @@ import UserPlaces from './places/pages/UserPlaces';
 import UpdatePlace from './places/pages/UpdatePlace';
 import Auth from './user/pages/Auth';
 import AuthContext from './shared/context/auth-context';
+import { useAuth } from './shared/components/hooks/auth-hook';
 
 const App = () => {
-  const [token, setToken] = useState(false);
-  const [userId, setUserId] = useState(false);
 
-  // Set userId to the ID passed
-  const login = useCallback((uid, token) => {
-    setToken(token);
-    setUserId(uid);
-  }, [])
-
-  // Clear the userId
-  const logout = useCallback(() => {
-    setToken(null);
-    setUserId(null);
-  }, [])
+  // Object destructuring
+  const { token, login, logout, userId } = useAuth();
 
   let routes;
 
@@ -66,7 +56,7 @@ const App = () => {
       </Switch>
     );
   }
-
+  
   return (
     <AuthContext.Provider value={{ isLoggedIn: !!token, token: token, userId: userId, login: login, logout: logout }}>
       <Router>
