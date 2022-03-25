@@ -15,7 +15,7 @@ const Users = () => {
     const fetchUsers = async () => {
       try {
         // By default sends a get request without a body nor headers
-        const responseData = await sendRequest('http://localhost:5000/api/users');
+        const responseData = await sendRequest(process.env.REACT_APP_BACKEND_URL + '/users');
 
         setLoadedUsers(responseData.users);
       } catch (err) {
