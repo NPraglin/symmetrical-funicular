@@ -72,13 +72,11 @@ const Auth = () => {
             'POST', 
             JSON.stringify({
               email: formState.inputs.email.value,
-    
-
               password: formState.inputs.password.value
             }), 
             {'Content-Type': 'application/json'}
           );
-        auth.login(responseData.user.id);
+        auth.login(responseData.userId, responseData.token);
         } catch (err) {
           // No need to handle error becuase custom hook handles that for us, this can be empty or just console.log
           console.log(err)
@@ -98,7 +96,7 @@ const Auth = () => {
         'POST', 
         formData);
     
-      auth.login(responseData.user.id);
+      auth.login(responseData.userId, responseData.token);
     } catch (err) {
       console.log(err);
       }
