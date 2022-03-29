@@ -8,4 +8,4 @@ Backend: https://github.com/NPraglin/backend
 ## Road Map
 - Search by zip code, city, and state implemented
 - API connection to view available space in area
-- Full migration to AWS hosting
+- Full migration to AWS hosting *complete*
