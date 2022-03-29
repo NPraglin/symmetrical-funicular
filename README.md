@@ -6,6 +6,8 @@ Backend: https://github.com/NPraglin/backend
 - MERN Stack
 
 ## Road Map
+~~- Migration to AWS file hosting~~
+- Migration to FireBase SPA (front end) hosting
 - Search by zip code, city, and state implemented
 - API connection to view available space in area
-- Full migration to AWS hosting *complete*
+
