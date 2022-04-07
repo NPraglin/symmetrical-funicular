@@ -11,7 +11,7 @@ import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import { useHttpClient } from "../../shared/components/hooks/http-hook";
 import ImageUpload from "../../shared/components/FormElements/imageUpload";
 
-
+// auth
 const Auth = () => {
   const auth = useContext(AuthContext);
 
