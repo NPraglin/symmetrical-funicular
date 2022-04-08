@@ -4,6 +4,11 @@ Backend: https://github.com/NPraglin/backend
 
 ## Technologies Used
 - MERN Stack
+- Google Maps API / Google Address => Coordinates API
+- Mantine React Library: https://mantine.dev/ 
+- Tabler Icons Library: https://tabler-icons.io/ 
+- Firebase (Frontend)
+- Heroku (Backend)
 
 ## Road Map
 - ~~Migration to AWS file hosting~~
