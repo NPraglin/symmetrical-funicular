@@ -7,11 +7,14 @@ Backend: https://github.com/NPraglin/backend
 
 ## Road Map
 ~~- Migration to AWS file hosting~~
-- Finish all places/search function with custom component rendering all places as smaller boxes
+~~- Finish all places/search function with custom component rendering all places as smaller boxes~~
   - Add rating stars (selectable)
   - Click to enlarge
   - Show pricing info
-- Migration to FireBase SPA (front end) hosting
+- Dropdown menu for "my profile" when logged in to show "my places" and "add place" on the navbar
+- Search locations based on free food/beverage
+~~- Migration to FireBase SPA (front end) hosting~~
 - Search by zip code, city, and state implemented
 - API connection to view available space in area
+- Add website links for posted locations
 

@@ -16,6 +16,7 @@ import AuthContext from './shared/context/auth-context';
 import { useAuth } from './shared/components/hooks/auth-hook';
 import LoadingSpinner from './shared/components/UIElements/LoadingSpinner';
 
+const Home = React.lazy(() => import ('./home/pages/Home'));
 const AllPlaces = React.lazy(() => import ('./places/pages/AllPlaces'));
 const Users = React.lazy(() => import('./user/pages/Users'));
 const NewPlace = React.lazy(() => import('./places/pages/NewPlace'));
@@ -23,8 +24,7 @@ const Auth = React.lazy(() => import('./user/pages/Auth'));
 const UserPlaces = React.lazy(() => import('./places/pages/UserPlaces'));
 const UpdatePlace = React.lazy(() => import('./places/pages/UpdatePlace'));
 
-
-
+// TODO re-wire users to a browse by user
 
 const App = () => {
 
@@ -37,10 +37,13 @@ const App = () => {
     routes = (
       <Switch>
         <Route path="/" exact>
-          <Users />
+          <Home />
         </Route>
         <Route path='/:userId/places' exact>
           <UserPlaces />
+        </Route>
+        <Route path="/users/all" exact>
+          <Users />
         </Route>
         <Route path="/places/all" exact>
           <AllPlaces />
@@ -58,7 +61,7 @@ const App = () => {
     routes = (
       <Switch>
         <Route path="/" exact>
-          <Users />
+          <Home />
         </Route>
         <Route path='/:userId/places' exact>
           <UserPlaces />

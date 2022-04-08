@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PlaceList from "../components/PlaceList";
+import MiniPlaceList from "../components/MiniPlaceList/MiniPlaceList";
 import { useHttpClient } from "../../shared/components/hooks/http-hook";
 import ErrorModal from "../../shared/components/UIElements/ErrorModal";
 import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
@@ -41,7 +41,7 @@ const AllPlaces = props => {
           <LoadingSpinner />
         </div>
       )}
-      {!isLoading && loadedPlaces && <PlaceList items={loadedPlaces} onDeletePlace={placeDeletedHandler} />}
+      {!isLoading && loadedPlaces && <MiniPlaceList items={loadedPlaces} onDeletePlace={placeDeletedHandler} />}
     </React.Fragment>
   );
 }
