@@ -6,14 +6,14 @@ Backend: https://github.com/NPraglin/backend
 - MERN Stack
 
 ## Road Map
-~~- Migration to AWS file hosting~~
-~~- Finish all places/search function with custom component rendering all places as smaller boxes~~
+- ~~Migration to AWS file hosting~~
+- ~~Finish all places/search function with custom component rendering all places as smaller boxes~~
+- ~~Migration to FireBase SPA (front end) hosting~~
   - Add rating stars (selectable)
   - Click to enlarge
   - Show pricing info
 - Dropdown menu for "my profile" when logged in to show "my places" and "add place" on the navbar
 - Search locations based on free food/beverage
-~~- Migration to FireBase SPA (front end) hosting~~
 - Search by zip code, city, and state implemented
 - API connection to view available space in area
 - Add website links for posted locations
