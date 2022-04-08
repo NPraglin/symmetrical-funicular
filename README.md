@@ -25,5 +25,5 @@ Backend: https://github.com/NPraglin/backend
 - Add website links for posted locations
 
 ## Current Bugs
-- Adding a place doesn't work as of 8 April 2022 due to AWS usage limitations. Upgrading data limitations shortly
+- Visiting the profile of a user with 0 places returns a looping error. Working on fix. It can be excaped by clicking the home "WorkByte" button on the NavBar a few times quickly.
 
