@@ -3,12 +3,13 @@ WorkByte: A web app for rating, reviewing, and sharing rentable work space. This
 Backend: https://github.com/NPraglin/backend
 
 ## Technologies Used
-- MERN Stack
+- JavaScript MERN Stack (MongoDB, Express, React, Node)
 - Google Maps API / Google Address => Coordinates API
 - Mantine React Library: https://mantine.dev/ 
 - Tabler Icons Library: https://tabler-icons.io/ 
 - Firebase (Frontend)
 - Heroku (Backend)
+- AWS S3 (Images/Data)
 
 ## Road Map
 - ~~Migration to AWS file hosting~~
