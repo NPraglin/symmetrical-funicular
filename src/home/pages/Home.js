@@ -13,6 +13,10 @@ const Home = () => {
         <Text>
           If you're a digital nomad, you may often be looking for places to get some work done. We're here to help. WorkByte is a completely free web-app to find, review, rate, and share work spaces! Perhaps your office is your local starbucks, or perhaps it's a WeWork location, either way post about it here!
         </Text>
+        <br />
+        <Text>
+          Please sign up and share your favorite cafe or work space! By sharing a location, you are aiding in the development of this platform.
+        </Text>
       </Paper>
     </div>
   );

@@ -3,6 +3,7 @@ import './PlaceList.css'
 import Card from "../../shared/components/UIElements/Card";
 import PlaceItem from './PlaceItem';
 import Button from "../../shared/components/FormElements/Button";
+import MiniPlaceItem from "./MiniPlaceList/MiniPlaceItem";
 
 const PlaceList = props => {
   
@@ -19,7 +20,7 @@ const PlaceList = props => {
 
     return <ul className='place-list'>
       {props.items.map(place => (
-        <PlaceItem 
+        <PlaceItem
           key={place.id} 
           id={place.id} 
           image={place.image} 

@@ -1,5 +1,5 @@
 import React , { useState }from "react";
-import { Card, Image, Text, Button, Badge, Group, useMantineTheme } from '@mantine/core';
+import { Card, Image, Text, Button, Badge, Group, useMantineTheme, Container } from '@mantine/core';
 import './MiniPlaceItem.css';
 import Modal from "../../../shared/components/UIElements/Modal";
 import Map from "../../../shared/components/UIElements/Map";
@@ -38,7 +38,7 @@ const MiniPlaceItem = props => {
             <Map center={props.coordinates} zoom={16} />
           </div>
         </Modal>
-      <li style={{ width: 340, height: 400, margin: 'auto' }}>
+      <div style={{ width: 400, height: 400, maxHeight: 400, margin: 'auto' }}>
         <Card shadow="sm" p="lg">
           {isLoading && <LoadingSpinner asOverlay />}
           <div>
@@ -56,7 +56,7 @@ const MiniPlaceItem = props => {
             <Button variant="light" color="red" fullWidth style={{ marginTop: 14 }} onClick={openMapHandler} >Open with Google</Button>
           </Group>
         </Card>
-      </li>
+      </div>
     </React.Fragment>
   );
 }

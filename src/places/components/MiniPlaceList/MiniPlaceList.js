@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import MiniPlaceItem from "./MiniPlaceItem";
 import Card from "../../../shared/components/UIElements/Card";
 import Button from "../../../shared/components/FormElements/Button";
-import { Input, Container } from '@mantine/core';
+import { Input, Container, SimpleGrid } from '@mantine/core';
 import { IconSearch } from '@tabler/icons';
+import { useHttpClient } from "../../../shared/components/hooks/http-hook";
 
 const MiniPlaceList = props => {
+
   
     if (props.items.length === 0) {
       return (
@@ -18,7 +20,8 @@ const MiniPlaceList = props => {
       );
     }
 
-    return <ul className='place-list'>
+    return (
+    <React.Fragment>
       <Container size="xs" px="xs">
         <Input
         size="sm"
@@ -26,21 +29,24 @@ const MiniPlaceList = props => {
         placeholder="Search by your address"
         />
       </Container>
-    <br />
-      {props.items.map(place => (
-        <MiniPlaceItem 
-          key={place.id} 
-          id={place.id} 
-          image={place.image} 
-          title={place.title} 
-          description={place.description} 
-          address={place.address} 
-          creatorId={place.creator} 
-          coordinates={place.location} 
-          onDelete={props.onDeletePlace}
-        />
-      ))}
-    </ul>;
+      <br />
+      <SimpleGrid cols={3} spacing="xs">
+        {props.items.map(place => (
+          <MiniPlaceItem 
+            key={place.id} 
+            id={place.id} 
+            image={place.image} 
+            title={place.title} 
+            description={place.description} 
+            address={place.address} 
+            creatorId={place.creator} 
+            coordinates={place.location} 
+            onDelete={props.onDeletePlace}
+          />
+        ))}
+      </SimpleGrid>
+    </React.Fragment>
+    );
 }
 
 export default MiniPlaceList;
