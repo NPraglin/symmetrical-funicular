@@ -22,6 +22,10 @@ const MiniPlaceItem = props => {
 
   const closeMapHandler = () => setShowMap(false);
 
+  const badgeHandler = () => {
+    console.log('badge prop', props.badge);
+  }
+
   return (
 
     <React.Fragment>
@@ -46,9 +50,7 @@ const MiniPlaceItem = props => {
           </div>
           <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
             <Text weight={500}>{props.title}</Text>
-            <Badge color="pink" variant="light">
-            Free Snacks / Drinks
-            </Badge>
+            {badgeHandler}
             <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>{props.address}</Text>
             <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>{props.description}</Text>
           </Group>
@@ -59,6 +61,6 @@ const MiniPlaceItem = props => {
       </div>
     </React.Fragment>
   );
-}
+};
 
 export default MiniPlaceItem;

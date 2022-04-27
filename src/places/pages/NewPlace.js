@@ -10,6 +10,7 @@ import { useHttpClient } from '../../shared/components/hooks/http-hook';
 import AuthContext from '../../shared/context/auth-context';
 import { useHistory } from 'react-router-dom';
 import ImageUpload from '../../shared/components/FormElements/imageUpload';
+import { Select } from '@mantine/core';
 
 const NewPlace = () => {
   const auth = useContext(AuthContext);
@@ -31,6 +32,10 @@ const NewPlace = () => {
     image: {
       value: null,
       isValid: false
+    },
+    badge: {
+      value: null,
+      isValid: false
     }
   }, false);
 
@@ -46,6 +51,7 @@ const NewPlace = () => {
     formData.append('description', formState.inputs.description.value);
     formData.append('address', formState.inputs.address.value);
     formData.append('image', formState.inputs.image.value);
+    formData.append('badge', formState.inputs.badge.value);
     // sendRequest hook to send data
     await sendRequest(process.env.REACT_APP_BACKEND_URL + '/places', 'POST', formData, {
       Authorization: 'Bearer ' + auth.token
@@ -86,6 +92,19 @@ const NewPlace = () => {
           validators={[VALIDATOR_REQUIRE()]} 
           errorText='Please enter a valid address.' 
           onInput={inputHandler}
+        />
+        <Select
+          id="badge"
+          element='input'
+          label='Badge'
+          placeholder="Badge"
+          onChange={inputHandler}
+          data={[
+            { value: '1', label: 'Free Snacks/Drnks' },
+            { value: '2', label: '🔥 Food' },
+            { value: '3', label: 'Office' },
+            { value: '4', label: 'Outdoors' },
+          ]}
         />
         <ImageUpload 
           id="image" 

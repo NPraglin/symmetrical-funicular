@@ -34,6 +34,7 @@ const MiniPlaceList = props => {
         {props.items.map(place => (
           <MiniPlaceItem 
             key={place.id} 
+            badge={place.badge}
             id={place.id} 
             image={place.image} 
             title={place.title} 
