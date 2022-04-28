@@ -100,7 +100,7 @@ const NewPlace = () => {
           placeholder="Badge"
           onChange={inputHandler}
           data={[
-            { value: '1', label: 'Free Snacks/Drnks' },
+            { value: '1', label: 'Free Snacks/Drinks' },
             { value: '2', label: '🔥 Food' },
             { value: '3', label: 'Office' },
             { value: '4', label: 'Outdoors' },

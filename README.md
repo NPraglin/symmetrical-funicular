@@ -15,6 +15,7 @@ Backend: https://github.com/NPraglin/backend
 - ~~Migration to AWS file hosting~~
 - ~~Finish all places/search function with custom component rendering all places as smaller boxes~~
 - ~~Migration to FireBase SPA (front end) hosting~~
+- Recently added feature
 - Add rating stars (selectable) to place items
 - Click to enlarge on place items
 - Show pricing info on possible rented places

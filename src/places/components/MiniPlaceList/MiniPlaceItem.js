@@ -22,8 +22,17 @@ const MiniPlaceItem = props => {
 
   const closeMapHandler = () => setShowMap(false);
 
+  // Maps the badges onto each card..
   const badgeHandler = () => {
-    console.log('badge prop', props.badge);
+    if (props.badge === "1") {
+      return <Badge color="pink" variant="light">Free Snacks/Drinks</Badge>
+    } else if (props.badge === "2") {
+      return <Badge color="pink" variant="light">🔥 Food</Badge>
+    } else if (props.badge === "3") {
+      return <Badge color="blue">Office</Badge>
+    } else if (props.badge === "4") {
+      return <Badge color="lime">Outdoors</Badge>
+    } else {return null}
   }
 
   return (
@@ -50,7 +59,7 @@ const MiniPlaceItem = props => {
           </div>
           <Group position="apart" style={{ marginBottom: 5, marginTop: theme.spacing.sm }}>
             <Text weight={500}>{props.title}</Text>
-            {badgeHandler}
+            {badgeHandler()}
             <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>{props.address}</Text>
             <Text size="sm" style={{ color: secondaryColor, lineHeight: 1.5 }}>{props.description}</Text>
           </Group>
