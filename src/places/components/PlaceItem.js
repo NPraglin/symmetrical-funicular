@@ -1,4 +1,5 @@
 import React , { useState, useContext }from "react";
+import { Group, Badge, Text } from '@mantine/core';
 import './PlaceItem.css';
 import Card from "../../shared/components/UIElements/Card";
 import Button from "../../shared/components/FormElements/Button";
@@ -41,6 +42,18 @@ const PlaceItem = props => {
       console.log(err)
     };
   }
+   // Maps the badges onto each card..
+   const badgeHandler = () => {
+    if (props.badge === "1") {
+      return <Badge color="pink" variant="light">Free Snacks/Drinks</Badge>
+    } else if (props.badge === "2") {
+      return <Badge color="pink" variant="light">🔥 Food</Badge>
+    } else if (props.badge === "3") {
+      return <Badge color="blue">Office</Badge>
+    } else if (props.badge === "4") {
+      return <Badge color="lime">Outdoors</Badge>
+    } else {return null}
+  }
 
   return (
 
@@ -78,9 +91,13 @@ const PlaceItem = props => {
             <img src={`${process.env.REACT_APP_ASSET_URL}/${props.image}`} alt={props.title} />
           </div>
           <div className='place-item__info'>
-            <h2>{props.title}</h2>
-            <h2>{props.address}</h2>
-            <p>{props.description}</p>
+            <Group position="apart">
+              <h2>{props.title}</h2>
+              {badgeHandler()}
+            </Group>
+            <Text align="left">{props.address}</Text>
+            <br />
+            <Text size="lg">{props.description}</Text>
           </div>
           <div className='place-item__actions'>
             <Button inverse onClick={openMapHandler} >Open with Google</Button>

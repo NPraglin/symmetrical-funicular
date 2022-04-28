@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from "react";
 import MiniPlaceItem from "./MiniPlaceItem";
 import Card from "../../../shared/components/UIElements/Card";
 import Button from "../../../shared/components/FormElements/Button";
-import { Input, Container, SimpleGrid } from '@mantine/core';
+import { Input, Container, SimpleGrid, Chips, Chip } from '@mantine/core';
 import { IconSearch } from '@tabler/icons';
 import { useHttpClient } from "../../../shared/components/hooks/http-hook";
 
@@ -28,6 +28,13 @@ const MiniPlaceList = props => {
         icon={<IconSearch />}
         placeholder="Search by your address"
         />
+        <br />
+        <Chips variant="filled" multiple>
+          <Chip value="free">Free Snacks/Drinks</Chip>
+          <Chip value="food">🔥 Food</Chip>
+          <Chip value="office">Office</Chip>
+          <Chip value="outdoors">Outdoors</Chip>
+        </Chips>
       </Container>
       <br />
       <SimpleGrid cols={3} spacing="xs">
